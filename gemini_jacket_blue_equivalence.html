@@ -431,12 +431,14 @@
         <div class="field">
           <label for="compareItem">Comparison item</label>
           <select id="compareItem">
-            <option value="jacket_custom" selected>Suit jacket</option>
-            <option value="average_meal">Average meal</option>
-            <option value="cotton_fabric_1kg">Cotton fabric (1 kg)</option>
+            <option value="jeans" selected>Pair of jeans</option>
             <option value="cotton_shirt">Cotton shirt</option>
-            <option value="orange_juice_glass">Orange juice (glass)</option>
-            <option value="orange_one">Orange (one)</option>
+            <option value="jacket_custom">Suit jacket</option>
+            <option value="leather_shoes">Leather shoes (pair, US)</option>
+            <option value="almonds_handful">Handful of almonds</option>
+            <option value="lawn_sprinkler_1hr">Lawn sprinkler (1 hour)</option>
+            <option value="cotton_sofa">Sofa (cotton)</option>
+            <option value="cotton_area_rug">Area rug (9×12 ft cotton)</option>
           </select>
         </div>
         <div class="field">
@@ -471,15 +473,15 @@
         </div>
         <div class="field">
           <label for="targetBlueL">Selected item blue water (L)</label>
-          <input id="targetBlueL" type="number" step="0.01" min="0" value="2310" disabled />
+          <input id="targetBlueL" type="number" step="0.01" min="0" value="2640" disabled />
         </div>
       </div>
     </div>
 
     <div class="hero">
-      <div class="hero-label" id="heroRate">At 100 Gemini queries/day</div>
+      <div class="hero-label" id="heroRate">At 100 Gemini queries/day, it would take</div>
       <div class="hero-time" id="heroTime">-</div>
-      <div class="hero-main" id="heroMain">to equal the blue-water footprint for <strong>one suit jacket</strong>.</div>
+      <div class="hero-main" id="heroMain">to equal the blue-water footprint for <strong>one pair of jeans (800 g cotton)</strong>.</div>
     </div>
 
     <div class="focus-cards">
@@ -572,12 +574,24 @@
             <a href="https://tools.waterfootprint.org/product-gallery/details.php?product=16" target="_blank" rel="noopener noreferrer">WFN cotton detail</a>.
           </li>
           <li>
-            Orange and orange juice footprints (80 L/orange; 1020 L/L juice; 20% blue share):
-            <a href="https://tools.waterfootprint.org/product-gallery/details.php?product=29" target="_blank" rel="noopener noreferrer">WFN orange detail</a>.
+            Bovine leather water footprint (17,093 L/kg total; 4% blue share global baseline):
+            <a href="https://www.waterfootprint.org/resources/Mekonnen-Hoekstra-2012-WaterFootprintFarmAnimalProducts_1.pdf" target="_blank" rel="noopener noreferrer">Mekonnen &amp; Hoekstra (2012), Water Footprint of Farm Animal Products</a>.
           </li>
           <li>
-            Average meal proxy (blue water only): North America median blue dietary footprint = 220 L/person/day, converted to a meal basis as 220/3 L:
-            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7442390/" target="_blank" rel="noopener noreferrer">Harris et al. (2019) systematic review (PMC)</a>.
+            US cattle blue water correction (2,275 L/kg blue for US beef, 4.33&times; M&amp;H global; applied to leather):
+            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9667972/" target="_blank" rel="noopener noreferrer">Klopatek &amp; Oltjen (2022), Journal of Animal Science</a>.
+          </li>
+          <li>
+            California almond blue water footprint (5,290 L/kg blue; 10,240 L/kg total):
+            <a href="https://www.sciencedirect.com/science/article/pii/S1470160X17308592" target="_blank" rel="noopener noreferrer">Fulton et al. (2019), Water-indexed benefits and impacts of California almonds, Ecological Indicators</a>.
+          </li>
+          <li>
+            Lawn sprinkler flow rate (12 GPM typical residential oscillating sprinkler; 720 gal/hr):
+            <a href="https://www.epa.gov/watersense/outdoor-water-use-in-the-united-states" target="_blank" rel="noopener noreferrer">EPA WaterSense outdoor water use</a>.
+          </li>
+          <li>
+            Sofa upholstery fabric quantity (18 yards of 54-in fabric at 375 GSM &asymp; 7.5 kg cotton):
+            <a href="https://revolutionfabrics.com/blogs/gotcha-covered/how-much-upholstery-fabric-do-i-need-for-a-couch" target="_blank" rel="noopener noreferrer">Revolution Fabrics yardage guide</a>.
           </li>
           <li>
             Average American annual blue-water baseline used for percentage comparison:
@@ -636,36 +650,46 @@
     };
 
     const itemDefs = {
-      average_meal: {
-        label: "one average meal",
-        blueLiters: () => 220 / 3,
-        note: "220 L/person/day (North America median blue diet WF) / 3 meals/day"
-      },
-      orange_juice_glass: {
-        label: "one 200 mL glass of orange juice",
-        blueLiters: () => 1020 * 0.20 * 0.2,
-        note: "1020 L/L juice x 20% blue x 0.2 L"
-      },
-      orange_one: {
-        label: "one orange (150 g)",
-        blueLiters: () => 80 * 0.20,
-        note: "80 L per orange x 20% blue"
+      jeans: {
+        label: "one pair of jeans (800 g cotton)",
+        blueLiters: () => 10000 * 0.33 * 0.80,
+        note: "10,000 L/kg cotton x 33% blue x 0.80 kg"
       },
       cotton_shirt: {
         label: "one cotton shirt (250 g)",
         blueLiters: () => 2495 * 0.33,
         note: "2495 L per shirt x 33% blue"
       },
-      cotton_fabric_1kg: {
-        label: "1 kg of cotton fabric",
-        blueLiters: () => 10000 * 0.33,
-        note: "10,000 L/kg x 33% blue"
-      },
       jacket_custom: {
         label: "one suit jacket",
         blueLiters: () => n("cottonTotalLkg") * n("blueShare") * n("jacketKg"),
         note: "cotton_L_per_kg x blue_share x jacket_kg"
-      }
+      },
+      leather_shoes: {
+        label: "one pair of leather shoes (US)",
+        blueLiters: () => 17093 * 0.04 * 4.33 * 0.50,
+        note: "17,093 L/kg bovine leather (M&H) x 4% blue x 4.33 US correction (Klopatek & Oltjen 2022) x 0.50 kg"
+      },
+      almonds_handful: {
+        label: "a handful of almonds (28 g)",
+        blueLiters: () => 5290 * 0.028,
+        note: "5,290 L/kg blue water (California almonds, Fulton et al. 2019) x 0.028 kg (1 oz serving, ~23 almonds)"
+      },
+      lawn_sprinkler_1hr: {
+        label: "one hour of lawn sprinkler",
+        blueLiters: () => 720 * 3.785411784 * 0.70,
+        note: "12 GPM x 60 min = 720 gal x 3.785 L/gal x 70% consumptive (ET + evaporative losses)"
+      },
+      cotton_sofa: {
+        label: "one sofa (cotton upholstery)",
+        blueLiters: () => 10000 * 0.33 * 7.5,
+        note: "10,000 L/kg cotton x 33% blue x 7.5 kg upholstery fabric"
+      },
+      cotton_area_rug: {
+        label: "one 9×12 ft cotton area rug",
+        blueLiters: () => 10000 * 0.33 * 20,
+        note: "10,000 L/kg cotton x 33% blue x 20 kg (9x12 ft woven cotton rug at ~2.4 kg/m²)"
+      },
     };
 
     const TRACE_ARCHIVE_LOOKUP = {
@@ -718,26 +742,49 @@
         id: "wfn_cotton_footprints",
         valueUsed: "10,000 L/kg cotton, 33% blue, 2,495 L/shirt",
         whereUsed: [
-          "itemDefs.cotton_fabric_1kg",
+          "itemDefs.jeans",
           "itemDefs.cotton_shirt",
-          "itemDefs.jacket_custom (cottonTotalLkg, blueShare defaults)"
+          "itemDefs.jacket_custom (cottonTotalLkg, blueShare defaults)",
+          "itemDefs.cotton_sofa",
+          "itemDefs.cotton_area_rug"
         ],
         quality: "Secondary benchmark dataset",
         url: "https://tools.waterfootprint.org/product-gallery/details.php?product=16"
       },
       {
-        id: "wfn_orange_footprints",
-        valueUsed: "80 L/orange, 1,020 L/L orange juice, 20% blue share",
-        whereUsed: ["itemDefs.orange_one", "itemDefs.orange_juice_glass"],
-        quality: "Secondary benchmark dataset",
-        url: "https://tools.waterfootprint.org/product-gallery/details.php?product=29"
+        id: "mekonnen_hoekstra_2012_leather",
+        valueUsed: "17,093 L/kg bovine leather total WF; 4% blue share (global baseline)",
+        whereUsed: ["itemDefs.leather_shoes"],
+        quality: "Peer-reviewed primary research",
+        url: "https://www.waterfootprint.org/resources/Mekonnen-Hoekstra-2012-WaterFootprintFarmAnimalProducts_1.pdf"
       },
       {
-        id: "meal_proxy_harris2019",
-        valueUsed: "220 L/person/day (North America median blue diet WF), meal proxy = 220/3",
-        whereUsed: ["itemDefs.average_meal"],
-        quality: "Peer-reviewed literature synthesis",
-        url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7442390/"
+        id: "klopatek_oltjen_2022_us_beef_blue",
+        valueUsed: "US beef blue water = 2,275 L/kg (4.33x M&H global); correction applied to leather",
+        whereUsed: ["itemDefs.leather_shoes (US correction factor)"],
+        quality: "Peer-reviewed US-specific research (Journal of Animal Science)",
+        url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9667972/"
+      },
+      {
+        id: "fulton_2018_california_almonds",
+        valueUsed: "Blue WF = 5,290 L/kg; Green = 570 L/kg; Grey = 4,380 L/kg; Total = 10,240 L/kg (California almonds, 2004-2015 avg)",
+        whereUsed: ["itemDefs.almonds_handful"],
+        quality: "Peer-reviewed primary research (Ecological Indicators)",
+        url: "https://www.sciencedirect.com/science/article/pii/S1470160X17308592"
+      },
+      {
+        id: "sprinkler_flow_rate",
+        valueUsed: "12 GPM typical residential oscillating sprinkler; 720 gal/hr = 2,725 L/hr; 70% consumptive (ET) = 1,908 L",
+        whereUsed: ["itemDefs.lawn_sprinkler_1hr"],
+        quality: "Industry standard / EPA WaterSense outdoor guidance",
+        url: "https://www.epa.gov/watersense/outdoor-water-use-in-the-united-states"
+      },
+      {
+        id: "sofa_upholstery_fabric_mass",
+        valueUsed: "7.5 kg cotton fabric (18 yards of 54-in fabric at 375 GSM)",
+        whereUsed: ["itemDefs.cotton_sofa"],
+        quality: "Industry upholstery yardage guides (Revolution Fabrics, InteriorDecorating.com)",
+        url: "https://revolutionfabrics.com/blogs/gotcha-covered/how-much-upholstery-fabric-do-i-need-for-a-couch"
       },
       {
         id: "usgs_conus_consumptive_2020_model",
@@ -763,12 +810,14 @@
     ];
 
     const ITEM_SOURCE_REQUIREMENTS = {
-      average_meal: ["meal_proxy_harris2019"],
-      orange_juice_glass: ["wfn_orange_footprints"],
-      orange_one: ["wfn_orange_footprints"],
+      jeans: ["wfn_cotton_footprints"],
       cotton_shirt: ["wfn_cotton_footprints"],
-      cotton_fabric_1kg: ["wfn_cotton_footprints"],
-      jacket_custom: ["wfn_cotton_footprints", "jacket_mass_default_assumption"]
+      jacket_custom: ["wfn_cotton_footprints", "jacket_mass_default_assumption"],
+      leather_shoes: ["mekonnen_hoekstra_2012_leather", "klopatek_oltjen_2022_us_beef_blue"],
+      almonds_handful: ["fulton_2018_california_almonds"],
+      lawn_sprinkler_1hr: ["sprinkler_flow_rate"],
+      cotton_sofa: ["wfn_cotton_footprints", "sofa_upholstery_fabric_mass"],
+      cotton_area_rug: ["wfn_cotton_footprints"]
     };
 
     const CORE_ASSUMPTION_REQUIREMENTS = [
@@ -1127,10 +1176,10 @@
       const daysDirect = targetBlueL / dailyDirectL;
       const daysTotal = targetBlueL / dailyTotalL;
 
-      document.getElementById("heroRate").textContent = `At ${qpd.toLocaleString()} Gemini queries/day`;
+      document.getElementById("heroRate").textContent = `At ${qpd.toLocaleString()} Gemini queries/day, it would take`;
       document.getElementById("heroTime").textContent = formatTime(daysTotal);
       document.getElementById("heroMain").innerHTML =
-        `it would take ${formatTime(daysTotal)} to equal the blue-water footprint for <strong>${item.label}</strong>.`;
+        `to equal the blue-water footprint for <strong>${item.label}</strong>.`;
       document.getElementById("hydroNote").style.display = offsiteKey === "lbnl" ? "block" : "none";
 
       document.getElementById("focusDirectTime").textContent = formatTime(daysDirect);
