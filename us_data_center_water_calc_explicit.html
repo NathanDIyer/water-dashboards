@@ -238,163 +238,6 @@
     .metric-conditional.metric-dimmed {
       opacity: 0.35;
     }
-    .treemap {
-      display: flex;
-      height: 260px;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid #d3dfec;
-      gap: 2px;
-      background: #d3dfec;
-    }
-    .tm-block {
-      position: relative;
-      overflow: hidden;
-      padding: 10px;
-    }
-    .tm-label {
-      font-weight: 700;
-      line-height: 1.35;
-      color: rgba(255,255,255,0.95);
-    }
-    .tm-name {
-      font-size: 12px;
-      display: block;
-    }
-    .tm-pct {
-      font-size: 22px;
-      font-weight: 800;
-      display: block;
-      margin-top: 2px;
-    }
-    .tm-val {
-      font-size: 11px;
-      display: block;
-      opacity: 0.75;
-      margin-top: 2px;
-    }
-    .tm-irrigation { background: linear-gradient(150deg, #2e7d47 0%, #43a05e 100%); }
-    .tm-public { background: linear-gradient(150deg, #4a6fa5 0%, #6088be 100%); }
-    .tm-thermo { background: linear-gradient(150deg, #b87020 0%, #d49030 100%); }
-    .tm-right {
-      display: flex;
-      flex-direction: column;
-      min-width: 140px;
-      gap: 2px;
-      background: #d3dfec;
-    }
-    .tm-dc-box {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      background: linear-gradient(130deg, #7b2d8e 0%, #a855c8 100%);
-      border: 1px solid rgba(255,255,255,0.8);
-      border-radius: 2px;
-      transition: width 0.3s ease, height 0.3s ease;
-      box-shadow: 0 0 8px rgba(123,45,142,0.45);
-      display: flex;
-      align-items: flex-end;
-      padding: 2px 3px;
-      overflow: visible;
-    }
-    .tm-dc-label {
-      font-size: 9px;
-      font-weight: 700;
-      color: #fff;
-      white-space: nowrap;
-      line-height: 1;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-    }
-    .tm-dc-box.tm-dc-box-small .tm-dc-label {
-      position: absolute;
-      left: calc(100% + 4px);
-      bottom: 0;
-      color: #7b2d8e;
-      text-shadow: none;
-      font-size: 10px;
-    }
-    .tm-callout {
-      margin-top: 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 16px;
-      font-size: 13px;
-      color: #284762;
-    }
-    .tm-callout-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .tm-callout-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
-      background: linear-gradient(130deg, #7b2d8e 0%, #a855c8 100%);
-      flex-shrink: 0;
-    }
-    .tm-callout strong {
-      color: #7b2d8e;
-      font-weight: 800;
-    }
-    .vol-zoom {
-      margin-top: 14px;
-    }
-    .vol-zoom-head {
-      margin-bottom: 6px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-weight: 700;
-      color: #3d5973;
-    }
-    .vol-zoom-track {
-      display: flex;
-      height: 26px;
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid #d3dfec;
-      background: #eef3f8;
-    }
-    .vol-seg {
-      height: 100%;
-      transition: flex 0.3s ease;
-      min-width: 0;
-    }
-    .vol-seg-direct { background: linear-gradient(90deg, #0a5ea8, #2680c9); }
-    .vol-seg-thermal { background: linear-gradient(90deg, #e39d32, #d9781a); }
-    .vol-seg-hydro { background: linear-gradient(90deg, #5aadcc, #3d94b3); }
-    .vol-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 8px;
-      font-size: 12px;
-      color: #284762;
-    }
-    .vol-legend-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .vol-legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 3px;
-      flex-shrink: 0;
-    }
-    .vol-legend-dot.direct { background: #1d73bd; }
-    .vol-legend-dot.thermal { background: #dd8a24; }
-    .vol-legend-dot.hydro { background: #5aadcc; }
-    .vol-legend-val {
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
-    }
-    .vol-note {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #6b839a;
-    }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -437,6 +280,11 @@
     .note {
       color: var(--muted);
       font-size: 13px;
+    }
+    .rainfall-context {
+      margin: 10px 2px 0;
+      font-size: 12px;
+      color: #5f7388;
     }
     .evidence-quote {
       color: #103351;
@@ -860,41 +708,6 @@
     </div>
 
     <div class="card">
-      <div class="treemap" id="treemap">
-        <div class="tm-block tm-irrigation" id="tmIrrigation">
-          <div class="tm-label">
-            <span class="tm-name">Crop irrigation</span>
-            <span class="tm-pct" id="tmIrrPct"></span>
-            <span class="tm-val" id="tmIrrVal"></span>
-          </div>
-        </div>
-        <div class="tm-right" id="tmRight">
-          <div class="tm-block tm-public" id="tmPublic">
-            <div class="tm-label">
-              <span class="tm-name">Public supply</span>
-              <span class="tm-pct" id="tmPubPct"></span>
-            </div>
-            <div class="tm-dc-box" id="tmDcDirect"><span class="tm-dc-label" id="tmDcDirectLabel">DC direct</span></div>
-          </div>
-          <div class="tm-block tm-thermo" id="tmThermo">
-            <div class="tm-label">
-              <span class="tm-name">Thermoelectric</span>
-              <span class="tm-pct" id="tmThmPct"></span>
-            </div>
-            <div class="tm-dc-box" id="tmDcIndirect"><span class="tm-dc-label" id="tmDcIndirectLabel">DC indirect</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="tm-callout" id="tmCallout"></div>
-      <div class="vol-zoom">
-        <div class="vol-zoom-head">Data center breakdown (2025 modeled)</div>
-        <div class="vol-zoom-track" id="volZoomTrack"></div>
-        <div class="vol-legend" id="volLegend"></div>
-        <div class="vol-note" id="volNote"></div>
-      </div>
-    </div>
-
-    <div class="card">
       <h2>Industry Comparison (US Consumptive Use)</h2>
       <p class="note">
         Linear-scale bars in kAF/year. Data centers are stacked (direct + indirect) under current 2025 settings.
@@ -968,33 +781,36 @@
       </div>
     </div>
 
-    <div class="card grid">
-      <div>
-        <h2>2023 Shares of US Consumptive Water</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Share metric</th>
-              <th class="num">USGS denominator<br><span class="note">(~95,143.8 kAF/year, CONUS 2020 modeled)</span></th>
-            </tr>
-          </thead>
-          <tbody id="shareRows"></tbody>
-        </table>
+    <div class="card">
+      <div class="grid">
+        <div>
+          <h2>2023 Shares of US Consumptive Water</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Share metric</th>
+                <th class="num">USGS denominator<br><span class="note">(~95,143.8 kAF/year, CONUS 2020 modeled)</span></th>
+              </tr>
+            </thead>
+            <tbody id="shareRows"></tbody>
+          </table>
+        </div>
+        <div>
+          <h2>2025 Sensitivity Range (LBNL 2028 Bounds)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Path</th>
+                <th class="num">2025 direct kAF/year</th>
+                <th class="num">2025 total kAF/year</th>
+                <th class="num">2025 total share<br><span class="note">(USGS denominator)</span></th>
+              </tr>
+            </thead>
+            <tbody id="projRows"></tbody>
+          </table>
+        </div>
       </div>
-      <div>
-        <h2>2025 Sensitivity Range (LBNL 2028 Bounds)</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Path</th>
-              <th class="num">2025 direct kAF/year</th>
-              <th class="num">2025 total kAF/year</th>
-              <th class="num">2025 total share<br><span class="note">(USGS denominator)</span></th>
-            </tr>
-          </thead>
-          <tbody id="projRows"></tbody>
-        </table>
-      </div>
+      <p id="rainfallContextNote" class="note rainfall-context"></p>
     </div>
 
     <div class="card" id="methodsSummarySection">
@@ -1107,9 +923,9 @@
           </tr>
           <tr>
             <td>Industry comparison benchmarks (US)</td>
-            <td class="num">Chemical mfg 300; golf 292; mining (non-fuel) 200; pulp/paper 175; swimming pools 110; steel 66; oil refining 40 Bgal/year</td>
+            <td class="num">Chemical mfg 300; golf 292; mining (non-fuel) 200; pulp/paper 175; swimming pools 56; steel 66; oil refining 40 Bgal/year</td>
             <td>Static context rows in industry comparison chart (linear AF/year bars). Values are retained synthesis benchmarks; each sector has primary trace links here.</td>
-            <td><a href="https://www.aceee.org/files/proceedings/2017/data/polopoly_fs/1.3687919.1501159097!/fileserver/file/790285/filename/0036_0053_000025.pdf" target="_blank" rel="noopener noreferrer">Rao et al. 2017 (LBNL/ACEEE) chemical mfg estimate</a>; <a href="https://journals.ashs.org/horttech/view/journals/horttech/34/5/article-p617.xml" target="_blank" rel="noopener noreferrer">HortTechnology golf water survey paper</a>; <a href="https://water.usgs.gov/watuse/data/1995/" target="_blank" rel="noopener noreferrer">USGS Circular 1200 (1995) mining CU data</a>; <a href="https://www.usgs.gov/publications/water-requirements-pulp-and-paper-industry" target="_blank" rel="noopener noreferrer">USGS pulp/paper report</a>; <a href="https://www.epa.gov/watersense/swimming-pools-and-spas" target="_blank" rel="noopener noreferrer">EPA WaterSense pool evaporation</a> + <a href="https://nwsm.phta.org/consumers-parents/consumers-parentsbenefits-of-water/" target="_blank" rel="noopener noreferrer">PHTA 10.4M pool count</a>; <a href="https://www.usgs.gov/publications/water-requirements-iron-and-steel-industry" target="_blank" rel="noopener noreferrer">USGS steel report</a>; <a href="https://www.usgs.gov/publications/water-requirements-petroleum-refining-industry" target="_blank" rel="noopener noreferrer">USGS refining report</a></td>
+            <td><a href="https://www.aceee.org/files/proceedings/2017/data/polopoly_fs/1.3687919.1501159097!/fileserver/file/790285/filename/0036_0053_000025.pdf" target="_blank" rel="noopener noreferrer">Rao et al. 2017 (LBNL/ACEEE) chemical mfg estimate</a>; <a href="https://journals.ashs.org/horttech/view/journals/horttech/34/5/article-p617.xml" target="_blank" rel="noopener noreferrer">HortTechnology golf water survey paper</a>; <a href="https://water.usgs.gov/watuse/data/1995/" target="_blank" rel="noopener noreferrer">USGS Circular 1200 (1995) mining CU data</a>; <a href="https://www.usgs.gov/publications/water-requirements-pulp-and-paper-industry" target="_blank" rel="noopener noreferrer">USGS pulp/paper report</a>; <a href="https://www.epa.gov/watersense/swimming-pools-and-spas" target="_blank" rel="noopener noreferrer">EPA WaterSense pool evaporation (12K-31K gal/yr range)</a> + CAPE Analytics 7.5M satellite pool count (conservative; PHTA estimates 10.4M); size-corrected for 41% above-ground pool mix; <a href="https://www.usgs.gov/publications/water-requirements-iron-and-steel-industry" target="_blank" rel="noopener noreferrer">USGS steel report</a>; <a href="https://www.usgs.gov/publications/water-requirements-petroleum-refining-industry" target="_blank" rel="noopener noreferrer">USGS refining report</a></td>
           </tr>
           <tr>
             <td>Agriculture comparison crop baselines (US)</td>
@@ -1210,7 +1026,7 @@
           <tr>
             <td>CONUS annual precipitation volume</td>
             <td class="num">~4 mi&sup3;/day &asymp; 4,933,632 kAF/year</td>
-            <td>Denominator for rainfall comparison in treemap callout</td>
+            <td>Denominator for rainfall comparison context</td>
             <td><a href="https://www.usgs.gov/special-topics/water-science-school/science/rain-and-precipitation" target="_blank" rel="noopener noreferrer">USGS Rain and Precipitation</a></td>
           </tr>
           <tr>
@@ -1434,18 +1250,18 @@
         sourceUrl: "https://www.usgs.gov/publications/water-requirements-pulp-and-paper-industry"
       },
       {
-        id: "swimming_pools",
-        label: "Residential swimming pools (US)",
-        annualBgal: 110,
-        sourceLabel: "10.4M pools (PHTA) × EPA WaterSense evaporation, climate-weighted",
-        sourceUrl: "https://www.epa.gov/watersense/swimming-pools-and-spas"
-      },
-      {
         id: "steel",
         label: "Steelmaking (US)",
         annualBgal: 66,
         sourceLabel: "USGS steel report",
         sourceUrl: "https://www.usgs.gov/publications/water-requirements-iron-and-steel-industry"
+      },
+      {
+        id: "swimming_pools",
+        label: "Residential swimming pools (US)",
+        annualBgal: 56,
+        sourceLabel: "7.5M pools (CAPE Analytics satellite) × 7,500 gal/yr size- & climate-weighted evap (EPA WaterSense)",
+        sourceUrl: "https://www.epa.gov/watersense/swimming-pools-and-spas"
       },
       {
         id: "oil_refining",
@@ -1705,97 +1521,6 @@
     // USGS: CONUS receives ~4 mi³ precipitation/day; 1 mi³ = 3,379,200 AF
     const US_ANNUAL_PRECIP_AF = 4 * 3379200 * 365;
 
-    function renderVolume(directAF, thermalIndirectAF, hydroAF, includeHydro, ppaAvoidedAF, applyPpa, usgsAF, factor) {
-      const bDirect = directAF * factor;
-      const bThermal = thermalIndirectAF * factor;
-      const bHydro = includeHydro ? hydroAF * factor : 0;
-      const bIndirect = bThermal + bHydro;
-      const bTotal = bDirect + bIndirect;
-      const bPpaAvoided = ppaAvoidedAF * factor;
-
-      // Treemap flex layout (USGS sectors only; DC shown as sub-boxes)
-      const grand = USGS_IRR_AF + USGS_PUB_AF + USGS_THM_AF;
-      const rightTotal = USGS_PUB_AF + USGS_THM_AF;
-
-      document.getElementById("tmIrrigation").style.flex = (USGS_IRR_AF / 1000).toFixed(1);
-      document.getElementById("tmRight").style.flex = (rightTotal / 1000).toFixed(1);
-      document.getElementById("tmPublic").style.flex = (USGS_PUB_AF / 1000).toFixed(1);
-      document.getElementById("tmThermo").style.flex = (USGS_THM_AF / 1000).toFixed(1);
-
-      document.getElementById("tmIrrPct").textContent = ((USGS_IRR_AF / grand) * 100).toFixed(1) + "%";
-      document.getElementById("tmIrrVal").textContent = fmtKaf(USGS_IRR_AF, 0) + " kAF/yr";
-      document.getElementById("tmPubPct").textContent = ((USGS_PUB_AF / grand) * 100).toFixed(1) + "%";
-      document.getElementById("tmThmPct").textContent = ((USGS_THM_AF / grand) * 100).toFixed(1) + "%";
-
-      // Size DC boxes inside their parent sectors (area-proportional)
-      requestAnimationFrame(() => {
-        const pubEl = document.getElementById("tmPublic");
-        const pubW = pubEl.clientWidth;
-        const pubH = pubEl.clientHeight;
-        const directShare = bDirect / USGS_PUB_AF;
-        const directSide = Math.max(Math.sqrt(directShare * pubW * pubH), 4);
-        const dcDirectEl = document.getElementById("tmDcDirect");
-        dcDirectEl.style.width = directSide + "px";
-        dcDirectEl.style.height = directSide + "px";
-        dcDirectEl.className = directSide < 40 ? "tm-dc-box tm-dc-box-small" : "tm-dc-box";
-
-        const thmEl = document.getElementById("tmThermo");
-        const thmW = thmEl.clientWidth;
-        const thmH = thmEl.clientHeight;
-        const indirectShare = bIndirect / USGS_THM_AF;
-        const indirectSide = Math.max(Math.sqrt(indirectShare * thmW * thmH), 4);
-        const dcIndirectEl = document.getElementById("tmDcIndirect");
-        dcIndirectEl.style.width = indirectSide + "px";
-        dcIndirectEl.style.height = indirectSide + "px";
-        dcIndirectEl.className = indirectSide < 40 ? "tm-dc-box tm-dc-box-small" : "tm-dc-box";
-      });
-
-      // Callout below treemap
-      const dcPct = ((bTotal / grand) * 100).toFixed(3);
-      const rainFrac = Math.round(US_ANNUAL_PRECIP_AF / bTotal);
-      document.getElementById("tmCallout").innerHTML =
-        `<div class="tm-callout-item">` +
-        `<div class="tm-callout-dot"></div>` +
-        `<span>DC on-site <strong>${fmtKaf(bDirect, 1)}</strong> kAF/yr in public supply</span>` +
-        `</div>` +
-        `<div class="tm-callout-item">` +
-        `<div class="tm-callout-dot"></div>` +
-        `<span>DC power grid <strong>${fmtKaf(bIndirect, 1)}</strong> kAF/yr in thermoelectric</span>` +
-        `</div>` +
-        `<div class="tm-callout-item">` +
-        `<span>Total: <strong>${dcPct}%</strong> of US consumptive water \u00b7 ${fmtKaf(bTotal, 1)} kAF/yr \u00b7 ~1/${fmt(rainFrac, 0)} of annual US rainfall</span>` +
-        `</div>`;
-
-      // Zoom bar: DC component breakdown
-      const zoomSegs = [
-        { cls: "vol-seg-direct", val: bDirect, label: "On-site", dot: "direct" },
-        { cls: "vol-seg-thermal", val: bThermal, label: "Power grid (thermal)", dot: "thermal" }
-      ];
-      if (includeHydro && bHydro > 0) {
-        zoomSegs.push({ cls: "vol-seg-hydro", val: bHydro, label: "Hydro evaporation", dot: "hydro" });
-      }
-
-      document.getElementById("volZoomTrack").innerHTML = zoomSegs
-        .map(s => `<div class="vol-seg ${s.cls}" style="flex:${s.val.toFixed(2)}"></div>`)
-        .join("");
-
-      document.getElementById("volLegend").innerHTML = zoomSegs
-        .map(s =>
-          `<div class="vol-legend-item">` +
-          `<div class="vol-legend-dot ${s.dot}"></div>` +
-          `<span>${s.label}</span> ` +
-          `<span class="vol-legend-val">${fmtKaf(s.val, 1)} kAF/yr</span>` +
-          `</div>`)
-        .join("");
-
-      const noteEl = document.getElementById("volNote");
-      if (applyPpa && bPpaAvoided > 0) {
-        noteEl.textContent = `Power-grid segment is net of ${fmtKaf(bPpaAvoided, 1)} kAF/yr in PPA offsets.`;
-      } else {
-        noteEl.textContent = "";
-      }
-    }
-
     function buildAssumptionRows(state) {
       return [
         ["assumption", "value", "units", "how_used", "source"],
@@ -1829,7 +1554,7 @@
         ["industry_benchmark_oil_refining_annual_bgal", 40, "Bgal/year", "industry chart benchmark", "legacy synthesis benchmark (primary trace listed in source table)"],
         ["industry_benchmark_chemicals_annual_bgal", 300, "Bgal/year", "industry chart benchmark", "Rao et al. 2017 LBNL/ACEEE; Canadian-proxy consumptive fraction (~28%) applied to US withdrawal estimate"],
         ["industry_benchmark_mining_nonfuel_annual_bgal", 200, "Bgal/year", "industry chart benchmark", "USGS Circular 1200 (1995) county-level CU data; state decomposition to exclude fuel mining"],
-        ["industry_benchmark_swimming_pools_annual_bgal", 110, "Bgal/year", "industry chart benchmark", "10.4M residential pools (PHTA) × climate-weighted avg ~10,500 gal/pool/yr evaporative loss (EPA WaterSense 12K-31K range); CA cross-check: 234K AF/yr state pool/spa total (CUWCC PBMP 2010) scales consistently"],
+        ["industry_benchmark_swimming_pools_annual_bgal", 56, "Bgal/year", "industry chart benchmark", "Conservative estimate: 7.5M pools (CAPE Analytics satellite detection, lowest independent count) × 7,500 gal/pool/yr (EPA WaterSense 12K-31K range for 500 sq ft pool, climate-weighted to national avg ~11,700, then size-corrected ×0.74 for 41% above-ground pool mix at ~225 sq ft, cover-adjusted ×0.878 for 15% cover use rate). Range: 56-110 Bgal/yr. PHTA industry count (10.4M, unpublished methodology) would give 78-110 Bgal/yr."],
         ["ag_benchmark_alfalfa_af_year", bgalDayToAFYear(18.0), "AF/year", "ag chart denominator", "Lamsal & Marston 2025"],
         ["ag_benchmark_other_hay_grass_af_year", bgalDayToAFYear(9.0), "AF/year", "ag chart denominator", "Lamsal & Marston 2025"],
         ["ag_benchmark_cotton_af_year", bgalDayToAFYear(8.7), "AF/year", "ag chart denominator", "Lamsal & Marston 2025"],
@@ -1869,7 +1594,6 @@
       const dcDirectPctOfPublic = ((dcDirectAFYear / USGS_PUB_AF) * 100).toFixed(4);
       const dcIndirectPctOfThermo = ((dcIndirectAFYear / USGS_THM_AF) * 100).toFixed(4);
       const rainFracTrace = Math.round(US_ANNUAL_PRECIP_AF / dcTotalAFYear);
-      const treemapCallout = normalizeText(document.getElementById("tmCallout").textContent);
 
       const industryLines = [
         `Data centers (modeled 2025): direct ${(dcDirectAFYear / 1000).toFixed(6)} kAF/year; indirect ${(dcIndirectAFYear / 1000).toFixed(6)} kAF/year; total ${(dcTotalAFYear / 1000).toFixed(6)} kAF/year`,
@@ -1900,7 +1624,7 @@
         `- 2025 direct share: ${directHeadline} (${directMeta})`,
         `- 2025 direct + indirect share: ${totalHeadline} (${totalMeta})`,
         "",
-        "US water budget treemap (USGS consumptive sectors):",
+        "US water budget context (USGS consumptive sectors):",
         `- Crop irrigation: ${(USGS_IRR_AF / 1000).toFixed(1)} kAF/yr (${((USGS_IRR_AF / usgsGrand) * 100).toFixed(1)}%)`,
         `- Public supply: ${(USGS_PUB_AF / 1000).toFixed(1)} kAF/yr (${((USGS_PUB_AF / usgsGrand) * 100).toFixed(1)}%)`,
         `- Thermoelectric: ${(USGS_THM_AF / 1000).toFixed(1)} kAF/yr (${((USGS_THM_AF / usgsGrand) * 100).toFixed(1)}%)`,
@@ -1908,9 +1632,6 @@
         `- DC indirect (inside thermoelectric): ${(dcIndirectAFYear / 1000).toFixed(3)} kAF/yr = ${dcIndirectPctOfThermo}% of thermoelectric`,
         `- DC total as % of US consumptive water: ${dcPctOfConsumptive}%`,
         `- DC total as fraction of US annual rainfall (${(US_ANNUAL_PRECIP_AF / 1000).toFixed(0)} kAF/yr): ~1/${fmt(rainFracTrace, 0)}`,
-        "",
-        "Treemap callout (as displayed):",
-        treemapCallout,
         "",
         "Replenishment note (not modeled — gross consumption only):",
         "Google replenished 4.5B gal in 2024 (~64% of consumption; 112 projects, 68 watersheds).",
@@ -2101,8 +1822,6 @@
         `Default 2025 output under current settings: direct ${fmtKaf(buildoutDirectAFYear, 1)} kAF/year (${buildoutDirectShareUsgs.toFixed(3)}%); direct + indirect ${fmtKaf(buildoutTotalAFYear, 1)} kAF/year (${buildoutTotalShareUsgs.toFixed(3)}%). ` +
         `Sensitivity range (from LBNL 2028 bounds) for the same toggles: direct ${projLowDirectShare.toFixed(3)}% to ${projHighDirectShare.toFixed(3)}%; direct + indirect ${projLowShare.toFixed(3)}% to ${projHighShare.toFixed(3)}%.`;
 
-      renderVolume(directAFYr, adjustedNoHydroAFYear, hydroImpliedAFYr, includeHydro, ppaAvoidedAFYr, applyPpa, usgsAFYear, buildout2025CombinedFactor);
-
       document.getElementById("shareRows").innerHTML = `
         <tr>
           <td>Direct only</td>
@@ -2132,6 +1851,15 @@
           <td class="num">${pct(projHighShare, 3)}</td>
         </tr>
       `;
+
+      const rainfallSharePct = sharePct(buildoutTotalAFYear, US_ANNUAL_PRECIP_AF);
+      const rainfallFracText = buildoutTotalAFYear > 0
+        ? `1/${fmt(Math.max(1, Math.round(US_ANNUAL_PRECIP_AF / buildoutTotalAFYear)), 0)}`
+        : "n/a";
+      document.getElementById("rainfallContextNote").textContent =
+        `Rainfall context: current 2025 modeled data-center total (${fmtKaf(buildoutTotalAFYear, 1)} kAF/year) is ` +
+        `${rainfallSharePct.toFixed(3)}% of estimated annual CONUS precipitation ` +
+        `(${fmtKaf(US_ANNUAL_PRECIP_AF, 0)} kAF/year), about ${rainfallFracText}.`;
 
       setBar("barCoverage", ppaCoveragePct, "barCoverageVal");
       const thermalIntensityBarPct = clamp((displacedThermalLkwh / 5) * 100, 0, 100);
