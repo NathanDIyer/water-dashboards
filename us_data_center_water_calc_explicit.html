@@ -507,6 +507,12 @@
     .cmp-dot.other {
       background: #5c768f;
     }
+    .cmp-fill.policy {
+      background: linear-gradient(90deg, #b5451a, #d4652e);
+    }
+    .cmp-dot.policy {
+      background: #b5451a;
+    }
     @media (max-width: 900px) {
       .chart-head {
         display: none;
@@ -711,12 +717,13 @@
       <h2>Industry Comparison (US Consumptive Use)</h2>
       <p class="note">
         Linear-scale bars in kAF/year. Data centers are stacked (direct + indirect) under current 2025 settings.
-        Peer rows are U.S. industry context values. Alfalfa is intentionally excluded from this industry chart.
+        Only peer sectors with current, primary-sourced data are shown. Alfalfa is in the agriculture chart below.
       </p>
       <div class="cmp-legend">
         <span><span class="cmp-dot direct"></span>Data center direct</span>
         <span><span class="cmp-dot indirect"></span>Data center indirect</span>
         <span><span class="cmp-dot other"></span>Other industry total</span>
+        <span><span class="cmp-dot policy"></span>Policy-mandated (RFS ethanol)</span>
       </div>
       <div class="chart-head">
         <div>Industry</div>
@@ -725,7 +732,15 @@
         <div class="num">vs DC total</div>
       </div>
       <div id="industryChart" class="hchart"></div>
-      <p class="note">Source base: sector benchmark synthesis with primary-source trace links listed in Source Mapping below.</p>
+      <p class="note">Source base: primary-source trace links listed in Source Mapping below. Pulp/paper uses a conservative derived estimate from NCASI withdrawals, low-end consumptive fraction, and AF&amp;PA output decline.</p>
+      <p class="note"><strong>RFS ethanol (policy-mandated):</strong> This bar shows only the <em>marginal</em> irrigation water that would not exist without the Renewable Fuel Standard &mdash; not the total blue water embedded in all ethanol corn.
+        Teter et al. (2018) modeled the Mandate scenario (RFS through 2030, ~15 Bgal/yr corn ethanol) vs. a no-biofuels counterfactual using coupled BEPAM economic + CropWatR biophysical models at 10 km resolution.
+        The +729 billion liters/year net irrigation increase (&asymp; 192 Bgal/year) is concentrated in Kansas, Nebraska, Oklahoma, and Texas &mdash; regions that source &gt;90% of their irrigation from the Ogallala Aquifer, a fossil groundwater system with negligible natural recharge.
+        The same mandate also <em>reduced</em> groundwater infiltration by 587 billion liters/year, compounding the aquifer stress.
+        This is the most conservative estimate available: the total blue water of all US ethanol corn (1.0&ndash;1.4 trillion gal/yr before co-product allocation) is 5&ndash;7&times; larger.
+        Convergent support: Lark et al. (PNAS 2022) found the RFS expanded corn acreage by 2.8 Mha with corn prices up ~31%; Sampson et al. (2021) showed ethanol markets drove ~4% of total Kansas irrigated water use at the field level, scaling consistently to the Teter national estimate.
+        Co-product note: DDGS (distillers grains) is a byproduct of ethanol, not the reverse &mdash; the RFS mandate drives the corn demand. Under energy-based LCA allocation, 57% of crop water is attributed to ethanol. The 192 Bgal marginal figure avoids the allocation question entirely by measuring only the net increase caused by the policy.</p>
+      <p class="note"><strong>Disclosure gap:</strong> Several major US industrial water consumers (chemical manufacturing, steelmaking, mining, oil refining) are excluded from this chart because no current, primary-sourced consumptive-use data exists for these sectors. The US Census Bureau's Survey of Water Use in Manufacturing was defunded after 1983; USGS does not break out industrial water by subsector; and these industries do not voluntarily report consumption. Data centers are among the only US industrial water consumers with transparent, audited, annually reported water data.</p>
     </div>
 
     <div class="card">
@@ -845,7 +860,7 @@
         Microsoft committed to zero-water cooling on all new builds (Aug 2024);
         AWS operates at 0.15 L/kWh WUE (lowest among the big four).
         Comparable replenishment or offset commitments are not standard practice in peer sectors shown in the industry comparison above
-        (golf courses, pulp/paper, steel, oil refining, agriculture).
+        (golf courses, pulp/paper, swimming pools, agriculture).
       </p>
     </div>
 
@@ -923,9 +938,15 @@
           </tr>
           <tr>
             <td>Industry comparison benchmarks (US)</td>
-            <td class="num">Chemical mfg 300; golf 292; mining (non-fuel) 200; pulp/paper 175; swimming pools 56; steel 66; oil refining 40 Bgal/year</td>
-            <td>Static context rows in industry comparison chart (linear AF/year bars). Values are retained synthesis benchmarks; each sector has primary trace links here.</td>
-            <td><a href="https://www.aceee.org/files/proceedings/2017/data/polopoly_fs/1.3687919.1501159097!/fileserver/file/790285/filename/0036_0053_000025.pdf" target="_blank" rel="noopener noreferrer">Rao et al. 2017 (LBNL/ACEEE) chemical mfg estimate</a>; <a href="https://journals.ashs.org/horttech/view/journals/horttech/34/5/article-p617.xml" target="_blank" rel="noopener noreferrer">HortTechnology golf water survey paper</a>; <a href="https://water.usgs.gov/watuse/data/1995/" target="_blank" rel="noopener noreferrer">USGS Circular 1200 (1995) mining CU data</a>; <a href="https://www.usgs.gov/publications/water-requirements-pulp-and-paper-industry" target="_blank" rel="noopener noreferrer">USGS pulp/paper report</a>; <a href="https://www.epa.gov/watersense/swimming-pools-and-spas" target="_blank" rel="noopener noreferrer">EPA WaterSense pool evaporation (12K-31K gal/yr range)</a> + CAPE Analytics 7.5M satellite pool count (conservative; PHTA estimates 10.4M); size-corrected for 41% above-ground pool mix; <a href="https://www.usgs.gov/publications/water-requirements-iron-and-steel-industry" target="_blank" rel="noopener noreferrer">USGS steel report</a>; <a href="https://www.usgs.gov/publications/water-requirements-petroleum-refining-industry" target="_blank" rel="noopener noreferrer">USGS refining report</a></td>
+            <td class="num">Golf 292; pulp/paper ~68 (conservative derived estimate); swimming pools 56 Bgal/year</td>
+            <td>Static context rows in industry comparison chart (linear AF/year bars). Pulp/paper uses a conservative derived estimate anchored to NCASI withdrawals and low-end consumptive share, adjusted by AF&amp;PA output decline. Sectors without current primary-sourced consumption data (chemicals, steel, mining, oil refining) were excluded rather than rely on outdated USGS sector reports from the 1960s&ndash;70s.</td>
+            <td><a href="https://journals.ashs.org/view/journals/horttech/35/5/article-p848.xml" target="_blank" rel="noopener noreferrer">GCSAA Golf Environmental Profile Phase IV; HortTechnology 35(5), 2025</a>; <a href="https://www.ncasi.org/wp-content/uploads/2019/02/tb960.pdf" target="_blank" rel="noopener noreferrer">NCASI TB960 (U.S. paper industry water profile)</a>; <a href="https://www.afandpa.org/news/2025/afpa-details-us-paper-production-and-capacity-trends" target="_blank" rel="noopener noreferrer">AF&amp;PA 2025 production/capacity release</a>; <a href="https://www.epa.gov/watersense/swimming-pools-and-spas" target="_blank" rel="noopener noreferrer">EPA WaterSense pool evaporation (12K-31K gal/yr range)</a> + CAPE Analytics 7.5M satellite pool count (conservative; PHTA estimates 10.4M); size-corrected for 41% above-ground pool mix</td>
+          </tr>
+          <tr>
+            <td>Pulp/paper conservative benchmark derivation (US)</td>
+            <td class="num">1,459 Bgal/year x 0.07 x 0.915 x 0.7293 = 68.2 Bgal/year</td>
+            <td>Used as the static pulp/paper row in the industry comparison chart. Inputs: NCASI withdrawals and low-end consumptive share, AF&amp;PA water-intensity improvement factor, and AF&amp;PA 2024 production factor <code>(78.1 x 0.875) / 93.7</code>.</td>
+            <td><a href="https://www.ncasi.org/wp-content/uploads/2019/02/tb960.pdf" target="_blank" rel="noopener noreferrer">NCASI TB960</a>; <a href="https://www.afandpa.org/sites/default/files/2025-07/2025AF%26PASustainabilityReport_FinalWeb.pdf" target="_blank" rel="noopener noreferrer">AF&amp;PA 2025 Sustainability Report</a>; <a href="https://www.afandpa.org/news/2025/afpa-details-us-paper-production-and-capacity-trends" target="_blank" rel="noopener noreferrer">AF&amp;PA production/capacity release</a></td>
           </tr>
           <tr>
             <td>Agriculture comparison crop baselines (US)</td>
@@ -1035,6 +1056,60 @@
             <td>All L/gal/AF conversions in this sheet</td>
             <td><a href="https://www.nist.gov/pml/owm/metric-si/unit-conversion" target="_blank" rel="noopener noreferrer">NIST</a> and <a href="https://www.usgs.gov/special-topics/water-science-school/science/facts-about-water" target="_blank" rel="noopener noreferrer">USGS water facts/unit context</a></td>
           </tr>
+          <tr>
+            <td>RFS ethanol mandate &mdash; marginal irrigation</td>
+            <td class="num">+729 billion liters/year net irrigation (Mandate vs. no-biofuels BAU) = 192 Bgal/year</td>
+            <td>Used as industry-chart comparison bar. This is the NET marginal increase: only the additional irrigation that would not exist without the RFS mandate. Conversion: 729e9 L &divide; 3.785 L/gal = 192.5e9 gal &asymp; 192 Bgal/yr (conservative rounding).</td>
+            <td><a href="https://doi.org/10.1371/journal.pone.0204298" target="_blank" rel="noopener noreferrer">Teter et al. (2018) &ldquo;Water impacts of U.S. biofuels&rdquo;, PLoS ONE 13(9): e0204298, Table 2</a></td>
+          </tr>
+          <tr>
+            <td>RFS ethanol &mdash; groundwater infiltration reduction</td>
+            <td class="num">&minus;587 billion liters/year (Mandate vs. BAU)</td>
+            <td>Not included in the bar value (which shows only irrigation increase), but noted as context: the mandate both increases pumping (+729B L) and reduces recharge (&minus;587B L), compounding aquifer stress.</td>
+            <td><a href="https://doi.org/10.1371/journal.pone.0204298" target="_blank" rel="noopener noreferrer">Teter et al. (2018) Table 2</a></td>
+          </tr>
+          <tr>
+            <td>RFS ethanol &mdash; Ogallala concentration</td>
+            <td class="num">TX, OK, KS source &gt;90% of their irrigation from Ogallala; NE also Ogallala-dependent</td>
+            <td>Spatial attribution: net irrigation increases under Mandate are concentrated in regions of Texas, Oklahoma, Kansas, and Nebraska that source the vast majority (&gt;90%) of their irrigation from the Ogallala Aquifer, drawn at unsustainable rates.</td>
+            <td><a href="https://doi.org/10.1371/journal.pone.0204298" target="_blank" rel="noopener noreferrer">Teter et al. (2018) pp. 11&ndash;12</a></td>
+          </tr>
+          <tr>
+            <td>RFS ethanol &mdash; BAU baseline irrigation</td>
+            <td class="num">109,100 billion liters/year (no-biofuels counterfactual total US irrigation for modeled crops)</td>
+            <td>Denominator context: +729B L is a 0.7% increase over 109,100B L BAU baseline. BEPAM model covers ~67% of US irrigation water applications.</td>
+            <td><a href="https://doi.org/10.1371/journal.pone.0204298" target="_blank" rel="noopener noreferrer">Teter et al. (2018) Table 2</a></td>
+          </tr>
+          <tr>
+            <td>RFS ethanol &mdash; model methodology</td>
+            <td class="num">BEPAM (economic, CRD-level) coupled with CropWatR (FAO 56 Penman-Monteith, 10 km resolution); 15 crops; 2007&ndash;2030; Mandate target 56.8B L corn ethanol by 2030</td>
+            <td>Coupled economic-biophysical model. BEPAM determines land use changes induced by biofuel policy; CropWatR estimates water balance impacts at 10 km &times; 10 km resolution using daily weather, soil texture, and crop-specific parameters. Open-source: github.com/jacobteter/CropWatR</td>
+            <td><a href="https://doi.org/10.1371/journal.pone.0204298" target="_blank" rel="noopener noreferrer">Teter et al. (2018) Section 2</a></td>
+          </tr>
+          <tr>
+            <td>RFS land-use change (convergent support)</td>
+            <td class="num">+2.8 Mha corn (+8.7%); +2.1 Mha total cropland (+2.4%); corn prices +31% [95% CI: 5%, 70%]</td>
+            <td>Independent validation of RFS-driven land use change at field level (3.6 million fields, 91.6% of US corn acreage). Expansion concentrated in Dakotas, western MN, Mississippi Alluvial Plain, and High Plains (KS, OK, TX).</td>
+            <td><a href="https://doi.org/10.1073/pnas.2101084119" target="_blank" rel="noopener noreferrer">Lark et al. (2022) &ldquo;Environmental outcomes of the US Renewable Fuel Standard&rdquo;, PNAS 119(9): e2101084119</a></td>
+          </tr>
+          <tr>
+            <td>RFS field-level irrigation response (convergent support)</td>
+            <td class="num">10% increase in ethanol plant capacity within 50 km &rarr; +0.22% annual water use per field; ethanol markets = ~4% of total Kansas irrigated water by 2017</td>
+            <td>Micro-level validation from 23,000 Kansas fields (2003&ndash;2017). Kansas is ~25% of Ogallala irrigation; scaling the 4% share nationally is consistent with Teter&rsquo;s macro estimate.</td>
+            <td><a href="https://doi.org/10.1016/j.reseneeco.2021.101249" target="_blank" rel="noopener noreferrer">Sampson, Al-Sudani &amp; Bergtold (2021) &ldquo;Local irrigation response to ethanol expansion in the High Plains Aquifer&rdquo;, Resource and Energy Economics 66: 101249</a></td>
+          </tr>
+          <tr>
+            <td>RFS ethanol &mdash; total blue water context (not used in chart)</td>
+            <td class="num">~1.0&ndash;1.4 trillion gal/year (all ethanol corn irrigation, no co-product allocation)</td>
+            <td>For context only. This is the total production-weighted blue water for all US ethanol corn, not just the marginal mandate increment. Derived from Argonne production-weighted ~76 gal/gal &times; 15.4B gal ethanol, cross-checked against Lamsal et al. (2025) total corn blue water (16.7 km&sup3;/yr) &times; 38% ethanol share.</td>
+            <td><a href="https://doi.org/10.2172/1490723" target="_blank" rel="noopener noreferrer">Wu et al. / Argonne (2018 Update)</a>; <a href="https://doi.org/10.1029/2024WR038334" target="_blank" rel="noopener noreferrer">Lamsal &amp; Marston (2025), Water Resources Research</a></td>
+          </tr>
+          <tr>
+            <td>RFS ethanol &mdash; co-product allocation (DDGS)</td>
+            <td class="num">Energy-based: 57% ethanol / 43% DDGS; mass-based: 49/51; economic: ~60&ndash;70 / 30&ndash;40</td>
+            <td>Not applied to the chart value (which is the marginal mandate increment, avoiding the allocation question). Documented for transparency: if full-production allocation were used, energy-based allocation attributes 57% of crop water to ethanol. DDGS is a byproduct of the ethanol mandate, not the reverse &mdash; RFS drove corn-to-ethanol from 14% to 40% of US corn since 2005.</td>
+            <td><a href="https://doi.org/10.2172/1490723" target="_blank" rel="noopener noreferrer">Wu et al. / Argonne (2018 Update)</a>; <a href="https://doi.org/10.1073/pnas.2101084119" target="_blank" rel="noopener noreferrer">Lark et al. (2022) &mdash; RFS stimulated 5.5 Bgal/yr additional ethanol</a></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -1108,16 +1183,64 @@
             <td><a href="https://apps.fas.usda.gov/gats/" target="_blank" rel="noopener noreferrer">USDA FAS GATS</a>; <a href="https://hayandforage.com/article-5229-Hay-exports-flatlined-in-2024.html" target="_blank" rel="noopener noreferrer">Hay &amp; Forage Grower</a>; Lamsal &amp; Marston 2025 (irrigation intensity basis)</td>
           </tr>
           <tr>
+            <td>Pulp/paper low-end conservative benchmark</td>
+            <td>
+              <p class="evidence-quote">NCASI reports 1,459 billion gallons/year withdrawn; gross consumption around 9.7% and about 7% after credits.</p>
+              <div class="evidence-meta">AF&amp;PA reports water use per ton down 8.5% since 2005, and 2024 paper and paperboard operating rate 87.5% with 78.1 million tons capacity. Low-end benchmark used here: 1,459 x 0.07 x (1-0.085) x ((78.1 x 0.875)/93.7) = 68.2 Bgal/year.</div>
+            </td>
+            <td><a href="https://www.ncasi.org/wp-content/uploads/2019/02/tb960.pdf" target="_blank" rel="noopener noreferrer">NCASI TB960</a>; <a href="https://www.afandpa.org/sites/default/files/2025-07/2025AF%26PASustainabilityReport_FinalWeb.pdf" target="_blank" rel="noopener noreferrer">AF&amp;PA 2025 Sustainability Report</a>; <a href="https://www.afandpa.org/news/2025/afpa-details-us-paper-production-and-capacity-trends" target="_blank" rel="noopener noreferrer">AF&amp;PA production/capacity release</a></td>
+          </tr>
+          <tr>
             <td>USGS denominator component values</td>
             <td>
-              <p class="evidence-quote">“... consumptive use ... public supply ... 4,219 Mgal/d ... crop irrigation ... 75,698 Mgal/d ... thermoelectric ... 2,904 Mgal/d ...”</p>
-              <div class="evidence-meta">USGS PP 1894-D abstract (CONUS, water years 2010-20 modeled values).</div>
+              <p class=”evidence-quote”>”Model estimates for ... consumptive use for public supply for the CONUS in water year 2020 were ... 4,157 Mgal/d ... crop irrigation ... 78,400 Mgal/d ... thermoelectric power ... 2,382 Mgal/d”</p>
+              <div class=”evidence-meta”>USGS PP 1894-D body text (CONUS, water year 2020 modeled values). Note: the abstract reports 2010-20 period averages (4,219 / 75,698 / 2,904 Mgal/d), which differ from the 2020-specific values used here.</div>
             </td>
-            <td><a href="https://pubs.usgs.gov/publication/pp1894D" target="_blank" rel="noopener noreferrer">USGS PP 1894-D</a></td>
+            <td><a href=”https://pubs.usgs.gov/publication/pp1894D” target=”_blank” rel=”noopener noreferrer”>USGS PP 1894-D</a></td>
+          </tr>
+          <tr>
+            <td>RFS ethanol &mdash; marginal irrigation from Mandate scenario (Table 2)</td>
+            <td>
+              <p class=”evidence-quote”>”Net irrigation requirements increase 0.7% in Mandate and decrease 3.8% in CFS, but in both scenarios increases are concentrated in regions of Kansas and Nebraska that rely upon the Ogallala aquifer for irrigation water.”</p>
+              <div class=”evidence-meta”>Teter et al. (2018) Table 2: BAU baseline irrigation = 109,100 billion L/yr; Mandate change = +729 billion L/yr (+0.7%). Groundwater infiltration change = &minus;587 billion L/yr (&minus;0.5%). Both impacts compound aquifer stress.</div>
+            </td>
+            <td><a href=”https://doi.org/10.1371/journal.pone.0204298” target=”_blank” rel=”noopener noreferrer”>Teter et al. (2018), PLoS ONE 13(9): e0204298, Table 2 and p. 11</a></td>
+          </tr>
+          <tr>
+            <td>RFS ethanol &mdash; Ogallala aquifer concentration</td>
+            <td>
+              <p class=”evidence-quote”>”net increases in irrigation water requirements occur in regions of Texas, Oklahoma, and Kansas that source the vast majority (&gt;90%) of their irrigation from the Ogallala Aquifer, a resource from which water is currently being drawn at unsustainable rates”</p>
+              <div class=”evidence-meta”>Teter et al. (2018) p. 12. The Mandate scenario shifts irrigation demand to the Great Plains (Ogallala region) even as it reduces irrigated acreage nationally by 2%, because increased corn in Kansas/Nebraska/Oklahoma requires more water per acre than the crops it displaces.</div>
+            </td>
+            <td><a href=”https://doi.org/10.1371/journal.pone.0204298” target=”_blank” rel=”noopener noreferrer”>Teter et al. (2018), p. 12</a></td>
+          </tr>
+          <tr>
+            <td>RFS land-use change &mdash; corn expansion and price impacts</td>
+            <td>
+              <p class=”evidence-quote”>”the RFS increased corn prices by 30% and the prices of other crops by 20%, which, in turn, expanded US corn cultivation by 2.8 Mha (8.7%) and total cropland by 2.1 Mha (2.4%)”</p>
+              <div class=”evidence-meta”>Lark et al. (2022) abstract. The 2.8 Mha of additional corn (95% CI: 2.4&ndash;3.1 Mha) includes 2.1 Mha increase in continuous corn and 1.4 Mha additional corn in rotation. Expansion concentrated in North/South Dakota, western Minnesota, Mississippi Alluvial Plain, and High Plains (KS, OK, TX).</div>
+            </td>
+            <td><a href=”https://doi.org/10.1073/pnas.2101084119” target=”_blank” rel=”noopener noreferrer”>Lark et al. (2022), PNAS 119(9): e2101084119</a></td>
+          </tr>
+          <tr>
+            <td>RFS ethanol &mdash; per-BGY scaling relationship</td>
+            <td>
+              <p class=”evidence-quote”>”for every billion gallons per year (BGY) expansion of ethanol demand, we would expect a 5.6% increase in corn prices; 1.6 and 0.4% increases in the areas of US corn and cropland, respectively”</p>
+              <div class=”evidence-meta”>Lark et al. (2022) Table 1 footnote. The RFS stimulated 5.5 Bgal/yr of additional ethanol beyond what the pre-2005 policy baseline would have produced.</div>
+            </td>
+            <td><a href=”https://doi.org/10.1073/pnas.2101084119” target=”_blank” rel=”noopener noreferrer”>Lark et al. (2022), Table 1</a></td>
+          </tr>
+          <tr>
+            <td>RFS ethanol &mdash; field-level Kansas irrigation response</td>
+            <td>
+              <p class=”evidence-quote”>A 10% increase in ethanol plant capacity within 50 km leads to a +0.22% increase in annual water use per field. By 2017, ethanol markets accounted for approximately 4% of total irrigated water use in Kansas.</p>
+              <div class=”evidence-meta”>Sampson et al. (2021), 23,000 Kansas fields (2003&ndash;2017). Kansas holds ~25% of Ogallala irrigated acreage; scaling the 4% share across all Ogallala states yields ~500,000 AF/yr, consistent with Teter&rsquo;s 590,000 AF/yr (+729B L) national estimate.</div>
+            </td>
+            <td><a href=”https://doi.org/10.1016/j.reseneeco.2021.101249” target=”_blank” rel=”noopener noreferrer”>Sampson, Al-Sudani &amp; Bergtold (2021), Resource and Energy Economics 66: 101249</a></td>
           </tr>
         </tbody>
       </table>
-      <p class="note">All links above are external primary or publisher-hosted sources for public traceability.</p>
+      <p class=”note”>All links above are external primary or publisher-hosted sources for public traceability.</p>
     </div>
 
     <div class="card" id="formulaTraceSection">
@@ -1220,41 +1343,29 @@
     const buildout2024Factor = INPUT.buildoutReference2024TWh / INPUT.electricity2023TWh;
     const buildout2025From2024Factor = 1 + (INPUT.cbre2025InventoryGrowthPct / 100);
     const buildout2025CombinedFactor = buildout2024Factor * buildout2025From2024Factor;
+    const PULP_PAPER_BASE_WITHDRAWALS_BGAL = 1459;
+    const PULP_PAPER_LOW_END_CONSUMPTIVE_SHARE = 0.07;
+    const PULP_PAPER_INTENSITY_FACTOR = 1 - 0.085;
+    const PULP_PAPER_OUTPUT_FACTOR = (78.1 * 0.875) / 93.7;
+    const PULP_PAPER_CONSERVATIVE_LOW_BGAL =
+      PULP_PAPER_BASE_WITHDRAWALS_BGAL *
+      PULP_PAPER_LOW_END_CONSUMPTIVE_SHARE *
+      PULP_PAPER_INTENSITY_FACTOR *
+      PULP_PAPER_OUTPUT_FACTOR;
     const industryAnnualBgal = [
-      {
-        id: "chemicals",
-        label: "Chemical manufacturing (US)",
-        annualBgal: 300,
-        sourceLabel: "Rao et al. 2017 (LBNL/ACEEE), Canadian-proxy method",
-        sourceUrl: "https://www.aceee.org/files/proceedings/2017/data/polopoly_fs/1.3687919.1501159097!/fileserver/file/790285/filename/0036_0053_000025.pdf"
-      },
       {
         id: "golf",
         label: "Golf courses (US)",
         annualBgal: 292,
-        sourceLabel: "HortTechnology golf water survey",
-        sourceUrl: "https://journals.ashs.org/horttech/view/journals/horttech/34/5/article-p617.xml"
-      },
-      {
-        id: "mining",
-        label: "Mining, non-fuel (US)",
-        annualBgal: 200,
-        sourceLabel: "USGS Circular 1200 (1995 county CU data, state decomposition)",
-        sourceUrl: "https://water.usgs.gov/watuse/data/1995/"
+        sourceLabel: "GCSAA Golf Environmental Profile Phase IV (2024 data); HortTechnology 35(5), 2025",
+        sourceUrl: "https://journals.ashs.org/view/journals/horttech/35/5/article-p848.xml"
       },
       {
         id: "pulp_paper",
         label: "Pulp and paper (US)",
-        annualBgal: 175,
-        sourceLabel: "USGS pulp/paper report",
-        sourceUrl: "https://www.usgs.gov/publications/water-requirements-pulp-and-paper-industry"
-      },
-      {
-        id: "steel",
-        label: "Steelmaking (US)",
-        annualBgal: 66,
-        sourceLabel: "USGS steel report",
-        sourceUrl: "https://www.usgs.gov/publications/water-requirements-iron-and-steel-industry"
+        annualBgal: Number(PULP_PAPER_CONSERVATIVE_LOW_BGAL.toFixed(1)),
+        sourceLabel: "Conservative estimate: NCASI withdrawals × 7% low-end consumptive share × AF&PA output decline",
+        sourceUrl: "https://www.ncasi.org/wp-content/uploads/2019/02/tb960.pdf"
       },
       {
         id: "swimming_pools",
@@ -1264,11 +1375,12 @@
         sourceUrl: "https://www.epa.gov/watersense/swimming-pools-and-spas"
       },
       {
-        id: "oil_refining",
-        label: "Oil refining (US)",
-        annualBgal: 40,
-        sourceLabel: "USGS refining report",
-        sourceUrl: "https://www.usgs.gov/publications/water-requirements-petroleum-refining-industry"
+        id: "rfs_ethanol",
+        label: "RFS ethanol mandate (marginal blue water, Ogallala-concentrated)",
+        annualBgal: 192,
+        isPolicy: true,
+        sourceLabel: "Teter et al. (2018) Table 2: +729B L/yr net irrigation, Mandate vs. no-biofuels (PLoS ONE 13(9): e0204298)",
+        sourceUrl: "https://doi.org/10.1371/journal.pone.0204298"
       },
     ];
     const agricultureBgalDay = [
@@ -1461,6 +1573,7 @@
           directAFYear: 0,
           indirectAFYear: 0,
           totalAFYear: annualBgalToAFYear(item.annualBgal),
+          isPolicy: item.isPolicy || false,
           sourceLabel: item.sourceLabel,
           sourceUrl: item.sourceUrl
         }))
@@ -1475,6 +1588,7 @@
         const directWidth = total > 0 ? totalWidth * (row.directAFYear / total) : 0;
         const indirectWidth = total > 0 ? totalWidth * (row.indirectAFYear / total) : 0;
         const otherWidth = row.id === "data_centers_modeled" ? 0 : totalWidth;
+        const fillClass = row.isPolicy ? "policy" : "other";
         const rel = buildoutTotalAFYear > 0 ? (total / buildoutTotalAFYear) : 0;
         const relLabel = row.id === "data_centers_modeled"
           ? "1.0x"
@@ -1489,7 +1603,7 @@
             ${row.id === "data_centers_modeled"
               ? `<div class="cmp-fill direct" style="width:${directWidth.toFixed(2)}%"></div>
                  <div class="cmp-fill indirect" style="width:${indirectWidth.toFixed(2)}%"></div>`
-              : `<div class="cmp-fill other" style="width:${otherWidth.toFixed(2)}%"></div>`}
+              : `<div class="cmp-fill ${fillClass}" style="width:${otherWidth.toFixed(2)}%"></div>`}
           </div>
           <div class="num">${fmtKaf(total, 1)}</div>
           <div class="num">${relLabel}</div>
@@ -1548,12 +1662,12 @@
         ["buildout_2024_vs_2023_factor", buildout2024Factor, "x", "first scale step in default 2025 path", "calculated"],
         ["buildout_2025_vs_2024_factor", buildout2025From2024Factor, "x", "second scale step in default 2025 path", "CBRE"],
         ["buildout_2025_vs_2023_factor", buildout2025CombinedFactor, "x", "headline 2025 point-estimate scale", "calculated"],
+        ["pulp_paper_withdrawals_bgal_year", PULP_PAPER_BASE_WITHDRAWALS_BGAL, "Bgal/year", "pulp/paper conservative benchmark input", "NCASI TB960"],
+        ["pulp_paper_low_end_consumptive_share_pct", PULP_PAPER_LOW_END_CONSUMPTIVE_SHARE * 100, "%", "pulp/paper conservative benchmark input", "NCASI TB960 (low-end with credits)"],
+        ["pulp_paper_intensity_factor", PULP_PAPER_INTENSITY_FACTOR, "x", "pulp/paper conservative benchmark input", "AF&PA 2025 Sustainability Report (8.5% reduction since 2005)"],
+        ["pulp_paper_output_factor", PULP_PAPER_OUTPUT_FACTOR, "x", "pulp/paper conservative benchmark input", "AF&PA production/capacity release: (78.1 x 0.875) / 93.7"],
         ["industry_benchmark_golf_annual_bgal", 292, "Bgal/year", "industry chart benchmark", "legacy synthesis benchmark (primary trace listed in source table)"],
-        ["industry_benchmark_pulp_paper_annual_bgal", 175, "Bgal/year", "industry chart benchmark", "legacy synthesis benchmark (primary trace listed in source table)"],
-        ["industry_benchmark_steel_annual_bgal", 66, "Bgal/year", "industry chart benchmark", "legacy synthesis benchmark (primary trace listed in source table)"],
-        ["industry_benchmark_oil_refining_annual_bgal", 40, "Bgal/year", "industry chart benchmark", "legacy synthesis benchmark (primary trace listed in source table)"],
-        ["industry_benchmark_chemicals_annual_bgal", 300, "Bgal/year", "industry chart benchmark", "Rao et al. 2017 LBNL/ACEEE; Canadian-proxy consumptive fraction (~28%) applied to US withdrawal estimate"],
-        ["industry_benchmark_mining_nonfuel_annual_bgal", 200, "Bgal/year", "industry chart benchmark", "USGS Circular 1200 (1995) county-level CU data; state decomposition to exclude fuel mining"],
+        ["industry_benchmark_pulp_paper_annual_bgal", Number(PULP_PAPER_CONSERVATIVE_LOW_BGAL.toFixed(1)), "Bgal/year", "industry chart benchmark", "lowest conservative estimate = 1459 x 0.07 x (1-0.085) x ((78.1 x 0.875)/93.7); sources: NCASI TB960 + AF&PA 2025 Sustainability Report + AF&PA 2025 production/capacity release"],
         ["industry_benchmark_swimming_pools_annual_bgal", 56, "Bgal/year", "industry chart benchmark", "Conservative estimate: 7.5M pools (CAPE Analytics satellite detection, lowest independent count) × 7,500 gal/pool/yr (EPA WaterSense 12K-31K range for 500 sq ft pool, climate-weighted to national avg ~11,700, then size-corrected ×0.74 for 41% above-ground pool mix at ~225 sq ft, cover-adjusted ×0.878 for 15% cover use rate). Range: 56-110 Bgal/yr. PHTA industry count (10.4M, unpublished methodology) would give 78-110 Bgal/yr."],
         ["ag_benchmark_alfalfa_af_year", bgalDayToAFYear(18.0), "AF/year", "ag chart denominator", "Lamsal & Marston 2025"],
         ["ag_benchmark_other_hay_grass_af_year", bgalDayToAFYear(9.0), "AF/year", "ag chart denominator", "Lamsal & Marston 2025"],
@@ -1638,7 +1752,7 @@
         "Meta replenished 1.5B gal in 2024.",
         "Microsoft committed to zero-water cooling on all new builds (Aug 2024).",
         "AWS operates at 0.15 L/kWh WUE (lowest among the big four).",
-        "Comparable replenishment/offset commitments are not standard in peer sectors (chemicals, golf, mining, pulp/paper, swimming pools, steel, oil refining, agriculture).",
+        "Comparable replenishment/offset commitments are not standard in peer sectors (golf, pulp/paper, swimming pools, agriculture).",
         "",
         "Current boundary note:",
         boundaryNote,
